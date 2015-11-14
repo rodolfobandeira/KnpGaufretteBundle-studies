@@ -10,4 +10,4 @@
 /vendor/
 /web/bundles/
 .idea/
-
+/app/config/amazon_s3.yml

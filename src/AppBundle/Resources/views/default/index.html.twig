@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+{% endblock %}
+
+
+{% block body %}
+    <p>
+        <h4>List of files from Amazon S3:</h4>
+        <hr />
+        <ul>
+        {% for file in files %}
+            <li>
+                <a href="{{ urlPrefix }}{{ file }}">{{ file }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </p>
+    <hr />
+    <p>
+        <h4>Upload new file:</h4>
+        {{ form(upload_form) }}
+    </p>
+{% endblock %}
