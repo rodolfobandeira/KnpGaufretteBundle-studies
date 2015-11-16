@@ -33,7 +33,13 @@ class DefaultController extends Controller
                     $adapter = $amazonS3->getAdapter();
                     $adapter->setAcl(AmazonS3::ACL_PRIVATE);
                     $adapter->setMetadata($filename, array('contentType' => $uploadedFile->getClientMimeType()));
-                    $adapter->write($filename, file_get_contents($uploadedFile->getPathname()));
+                    $write = $adapter->write($filename, file_get_contents($uploadedFile->getPathname()));
+
+                    if (!$write) {
+
+                        die('Error trying to upload');
+                    }
+
                 } catch(\Exception $e) {
                     die($e->getMessage());
                 }
