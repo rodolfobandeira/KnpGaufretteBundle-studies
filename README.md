@@ -20,6 +20,28 @@ A Symfony project created on November 13, 2015, 10:17 pm.
 - `php app/console server:run`
 - `http://127.0.0.1:8000`
 
+
+####Amazon S3 Bucket configuration:
+
+Please add this rule in your bucket policy to allow read-only to anonymous users on your files.
+
+The problem was the bucket policy. Solved adding read-only to anonymous users:
+
+```
+{
+  "Version":"2012-10-17",
+  "Statement":[
+    {
+      "Sid":"AddPerm",
+      "Effect":"Allow",
+      "Principal": "*",
+      "Action":["s3:GetObject"],
+      "Resource":["arn:aws:s3:::your-bucket-name/*"]
+    }
+  ]
+}
+```
+
 ---
 
 ####Reference:
@@ -30,7 +52,8 @@ adding all the config in just one file called: `app/config/amazon_s3.yml` :thumb
 repository. The full documentation is on their [README](https://github.com/KnpLabs/KnpGaufretteBundle/blob/master/README.markdown)
 - [https://github.com/KnpLabs/Gaufrette/blob/master/src/Gaufrette/Adapter/AmazonS3.php](https://github.com/KnpLabs/Gaufrette/blob/master/src/Gaufrette/Adapter/AmazonS3.php)
 To understand better how the AmazonS3 Adapter works.
-
+- 
+[https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html#example-bucket-policies-use-case-2](https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html#example-bucket-policies-use-case-2)
 
 --- 
 
